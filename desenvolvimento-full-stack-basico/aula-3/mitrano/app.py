@@ -9,7 +9,7 @@ from logger import logger
 from schemas import *
 from flask_cors import CORS
 
-info = Info(title="Minha API Prof", version="1.0.0")
+info = Info(title="Minha API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
 CORS(app)
 
@@ -91,7 +91,7 @@ def get_produto(query: ProdutoBuscaSchema):
 
     Retorna uma representação dos produtos e comentários associados.
     """
-    produto_id = query.nome
+    produto_id = query.id
     logger.debug(f"Coletando dados sobre produto #{produto_id}")
     # criando conexão com a base
     session = Session()
@@ -168,6 +168,3 @@ def add_comentario(form: ComentarioSchema):
 
     # retorna a representação de produto
     return apresenta_produto(produto), 200
-
-if __name__ == '__main__':
-    app.run(debug=True)
